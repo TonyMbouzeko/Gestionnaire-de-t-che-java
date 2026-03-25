@@ -2,9 +2,11 @@ package src;
 
 import java.util.Scanner;
 
-public class main {
+public class Main {
 
     public static void main(String[] args) {
+
+        TaskManager taskManager = new TaskManager();
         
 
         Scanner scanner = new Scanner(System.in);
@@ -27,15 +29,14 @@ public class main {
                 case 1:
                     System.out.print("Entrez la tâche : ");
                     String description = scanner.nextLine();
-                    Task task = new Task(description);
-                    tasks.add(task);
+                    taskManager.addTask(description);
                     break;
 
                 case 2:
                     System.out.println("\nListe des tâches :");
 
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println(i+1 + " - " + tasks.get(i));
+                    for (Task task : taskManager.getTasks()) {
+                        System.out.println(task);
                     }
                     break;
 
@@ -44,9 +45,12 @@ public class main {
                     int index = scanner.nextInt();
                     scanner.nextLine();
 
-                    if (index > 0 && index <= tasks.size()) {
-                        tasks.remove(index-1);
+                    if (taskManager.deleteTask(index)) {
+                        System.out.println("Tâche supprimée avec succès.");
+                    } else {
+                        System.out.println("Numéro de tâche invalide.");
                     }
+                    
                     break;
 
                 case 4:
@@ -54,14 +58,15 @@ public class main {
                     int completeIndex = scanner.nextInt();
                     scanner.nextLine();
 
-                    if (completeIndex > 0 && completeIndex <= tasks.size()) {
-                        tasks.get(completeIndex-1).setCompleted(true);
+                    if (taskManager.completeTask(completeIndex)) {
+                        System.out.println("Tâche marquée comme terminée.");
+                    } else {
+                        System.out.println("Numéro de tâche invalide.");
                     }
                     break;
 
                 case 5:
                     scanner.close();
-                    saveTasks(tasks);
                     return;
 
                 default:
