@@ -2,79 +2,23 @@ package src;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
+
 import src.Task;
 
 public class TaskManager {
 
-    public static void main(String[] args) {
-
-        ArrayList<Task> tasks = new ArrayList<>();
-        loadTasks(tasks);
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-
-            System.out.println("\n--- Gestionnaire de tâches ---");
-            System.out.println("1. Ajouter une tâche");
-            System.out.println("2. Voir les tâches");
-            System.out.println("3. Supprimer une tâche");
-            System.out.println("4. Marquer une tâche comme terminée");
-            System.out.println("5. Quitter");
-
-            System.out.print("Choix : ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (choice) {
-
-                case 1:
-                    System.out.print("Entrez la tâche : ");
-                    String description = scanner.nextLine();
-                    Task task = new Task(description);
-                    tasks.add(task);
-                    break;
-
-                case 2:
-                    System.out.println("\nListe des tâches :");
-
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println(i+1 + " - " + tasks.get(i));
-                    }
-                    break;
-
-                case 3:
-                    System.out.print("Numéro de la tâche à supprimer : ");
-                    int index = scanner.nextInt();
-                    scanner.nextLine();
-
-                    if (index > 0 && index <= tasks.size()) {
-                        tasks.remove(index-1);
-                    }
-                    break;
-
-                case 4:
-                    System.out.print("Numéro de la tâche à marquer comme terminée : ");
-                    int completeIndex = scanner.nextInt();
-                    scanner.nextLine();
-
-                    if (completeIndex > 0 && completeIndex <= tasks.size()) {
-                        tasks.get(completeIndex-1).setCompleted(true);
-                    }
-                    break;
-
-                case 5:
-                    scanner.close();
-                    saveTasks(tasks);
-                    return;
-
-                default:
-                    System.out.println("Choix invalide");
-            }
-        }
-
-        
+    private ArrayList<Task> tasks;
+    
+    public TaskManager() {
+        tasks = new ArrayList<>();
     }
+
+// dans le getTasks, on retourne une nouvelle liste pour éviter que l'utilisateur puisse modifier directement la liste interne du TaskManager.
+    public List<Task> getTasks() {
+        return new ArrayList<>(tasks);
+    }
+
 
     static void saveTasks(ArrayList<Task> tasks) {
         FileWriter writer;
@@ -106,4 +50,32 @@ public class TaskManager {
             System.out.println("Aucune tâche à charger ou erreur lors du chargement : " + e.getMessage());
         }
     }
+
+    public Task addTask(String description) {
+        Task task = new Task(description);
+        tasks.add(task);
+        return task;
+    }
+
+    public boolean deleteTask(int index) {
+        if (isValidIndex(index)) {
+            tasks.remove(index-1);
+            return true;
+        }
+        return false;
+    }
+
+
+    public boolean completeTask(int index) {
+        if (isValidIndex(index)) {
+            tasks.get(index-1).setCompleted(true);
+            return true;
+        }
+        return false; 
+    }
+
+    private boolean isValidIndex(int index) {
+        return index > 0 && index <= tasks.size();
+    }
+
 }

@@ -3,6 +3,7 @@ public class Task {
 
     private String description;
     private boolean completed;
+    private long id;
     public Task(String description) {
         this.description = description;
         this.completed = false;
