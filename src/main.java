@@ -67,6 +67,7 @@ public class Main {
 
                 case 5:
                     scanner.close();
+                    taskManager.saveTasks();
                     return;
 
                 default:
