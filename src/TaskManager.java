@@ -2,86 +2,32 @@ package src;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
+import java.util.Iterator;
 import src.Task;
 
 public class TaskManager {
 
-    public static void main(String[] args) {
-
-        ArrayList<Task> tasks = new ArrayList<>();
-        loadTasks(tasks);
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-
-            System.out.println("\n--- Gestionnaire de tâches ---");
-            System.out.println("1. Ajouter une tâche");
-            System.out.println("2. Voir les tâches");
-            System.out.println("3. Supprimer une tâche");
-            System.out.println("4. Marquer une tâche comme terminée");
-            System.out.println("5. Quitter");
-
-            System.out.print("Choix : ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (choice) {
-
-                case 1:
-                    System.out.print("Entrez la tâche : ");
-                    String description = scanner.nextLine();
-                    Task task = new Task(description);
-                    tasks.add(task);
-                    break;
-
-                case 2:
-                    System.out.println("\nListe des tâches :");
-
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println(i+1 + " - " + tasks.get(i));
-                    }
-                    break;
-
-                case 3:
-                    System.out.print("Numéro de la tâche à supprimer : ");
-                    int index = scanner.nextInt();
-                    scanner.nextLine();
-
-                    if (index > 0 && index <= tasks.size()) {
-                        tasks.remove(index-1);
-                    }
-                    break;
-
-                case 4:
-                    System.out.print("Numéro de la tâche à marquer comme terminée : ");
-                    int completeIndex = scanner.nextInt();
-                    scanner.nextLine();
-
-                    if (completeIndex > 0 && completeIndex <= tasks.size()) {
-                        tasks.get(completeIndex-1).setCompleted(true);
-                    }
-                    break;
-
-                case 5:
-                    scanner.close();
-                    saveTasks(tasks);
-                    return;
-
-                default:
-                    System.out.println("Choix invalide");
-            }
-        }
-
-        
+    private ArrayList<Task> tasks;
+    private long nextId = 1;
+    
+    public TaskManager() {
+        tasks = new ArrayList<>();
+        loadTasks();
     }
 
-    static void saveTasks(ArrayList<Task> tasks) {
+// dans le getTasks, on retourne une nouvelle liste pour éviter que l'utilisateur puisse modifier directement la liste interne du TaskManager.
+    public List<Task> getTasks() {
+        return new ArrayList<>(tasks);
+    }
+
+//FileWriter est utilisé pour écrire les tâches dans un fichier texte. Chaque tâche est écrite sur une nouvelle ligne, avec son état de complétion, son id, et sa description, séparés par un caractère "|". Cela permet de sauvegarder les tâches de manière structurée et facilement lisible.
+    public void saveTasks() {
         FileWriter writer;
         try {
             writer = new FileWriter("data/tasks.txt");
-            for (Task task : tasks) {
-                writer.write(task.isCompleted() + "|" + task.getDescription() + "\n");
+            for (Task task : this.tasks) {
+                writer.write(task.isCompleted() + "|" + task.getId() + "|" + task.getDescription() + "\n");
             }
             writer.close();
         } catch (Exception e) {
@@ -89,21 +35,76 @@ public class TaskManager {
         }
     }
 
-    static void loadTasks(ArrayList<Task> tasks) {
-        try (BufferedReader fileScanner = new BufferedReader(new java.io.FileReader("tasks.txt"))) {
+
+    /* Pour charger les tâches on a utiliser BufferedReader pour lire le fichier ligne par ligne,
+    puis on split chaque ligne en utilisant le caractère "|" comme séparateur. On parse ensuite la première partie pour obtenir
+    l'état de complétion de la tâche et on utilise la deuxième partie comme description de la tâche.
+    Enfin, on crée une nouvelle instance de Task avec ces informations et on l'ajoute à la liste des tâches.*/
+    public void loadTasks() {
+        try (BufferedReader fileScanner = new BufferedReader(new java.io.FileReader("data/tasks.txt"))) {
             String line;
             while ((line = fileScanner.readLine()) != null) {
                 String[] parts = line.split("\\|");
-                if (parts.length == 2) {
+                if (parts.length == 3) {
                     boolean completed = Boolean.parseBoolean(parts[0]);
-                    String description = parts[1];
-                    Task task = new Task(description);
+                    long id = Long.parseLong(parts[1]);
+                    String description = parts[2];
+                    Task task = new Task(id, description);
                     task.setCompleted(completed);
-                    tasks.add(task);
+                    this.tasks.add(task);
                 }
             }
+            updateNextId();
         } catch (Exception e) {
             System.out.println("Aucune tâche à charger ou erreur lors du chargement : " + e.getMessage());
         }
+    }
+
+    public Task addTask(String description) {
+        Task task = new Task(nextId++, description);
+        tasks.add(task);
+        return task;
+    }
+
+    /*ICi j'utilise Iterator.remove pour retirer la tâche que l'itérateur pointe actuellement, ce qui est plus sûr que de modifier la liste directement pendant l'itération. 
+    La méthode retourne true si une tâche a été supprimée avec succès, ou false si aucune tâche avec l'id spécifié n'a été trouvée.*/
+    public boolean deleteTask(long id) {
+        Iterator<Task> iterator = tasks.iterator();
+
+        while (iterator.hasNext()) {
+            Task task = iterator.next();
+            if (task.getId() == id) {
+                iterator.remove();
+                return true;
+            }
+
+                
+        }
+        return false;
+    }
+
+    public boolean completeTask(long id) {
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                task.setCompleted(true);
+                return true;
+            }
+        }
+        return false; 
+    }
+
+
+/*lorsque je fais loadTasks, je dois m'assurer que le nextId est mis à jour pour éviter les conflits d'id lors de l'ajout de nouvelles tâches.
+ La méthode updateNextId parcourt toutes les tâches chargées pour trouver le plus grand id utilisé, puis met à jour nextId pour qu'il soit supérieur à ce maximum.*/
+   private void updateNextId() {
+    long maxId = 0;
+
+    for (Task task : tasks) {
+        if (task.getId() > maxId) {
+            maxId = task.getId();
+        }
+    }
+
+    nextId = maxId + 1;
     }
 }
