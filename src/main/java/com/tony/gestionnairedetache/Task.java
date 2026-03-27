@@ -4,10 +4,9 @@ public class Task {
     private String description;
     private boolean completed;
     private long id;
-    public Task(long id, String description) {
+    public Task(String description) {
         this.description = description;
         this.completed = false;
-        this.id = id;
     }
 
     public String getDescription() {
@@ -16,6 +15,10 @@ public class Task {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public boolean isCompleted() {

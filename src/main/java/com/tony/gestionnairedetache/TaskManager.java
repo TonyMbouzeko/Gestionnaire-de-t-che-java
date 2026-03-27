@@ -9,6 +9,7 @@ public class TaskManager {
 
     private ArrayList<Task> tasks;
     private long nextId = 1;
+
     
     public TaskManager() {
         tasks = new ArrayList<>();
@@ -48,7 +49,8 @@ public class TaskManager {
                     boolean completed = Boolean.parseBoolean(parts[0]);
                     long id = Long.parseLong(parts[1]);
                     String description = parts[2];
-                    Task task = new Task(id, description);
+                    Task task = new Task(description);
+                    task.setId(id);
                     task.setCompleted(completed);
                     this.tasks.add(task);
                 }
@@ -59,8 +61,8 @@ public class TaskManager {
         }
     }
 
-    public Task addTask(String description) {
-        Task task = new Task(nextId++, description);
+    public Task addTask(Task task) {
+        task.setId(nextId++);
         tasks.add(task);
         return task;
     }
@@ -103,7 +105,6 @@ public class TaskManager {
             maxId = task.getId();
         }
     }
-
     nextId = maxId + 1;
     }
 }
