@@ -71,18 +71,16 @@ public class TaskManager {
     La méthode retourne true si une tâche a été supprimée avec succès, ou false si aucune tâche avec l'id spécifié n'a été trouvée.*/
     public boolean deleteTask(long id) {
         Iterator<Task> iterator = tasks.iterator();
-
         while (iterator.hasNext()) {
             Task task = iterator.next();
             if (task.getId() == id) {
                 iterator.remove();
                 return true;
-            }
-
-                
+            }  
         }
         return false;
     }
+
 
     public boolean completeTask(long id) {
         for (Task task : tasks) {
@@ -95,6 +93,15 @@ public class TaskManager {
     }
 
 
+
+    public Task getTaskbyId(long id) {
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                return task;
+            }
+        }
+        return null; 
+    }
 /*lorsque je fais loadTasks, je dois m'assurer que le nextId est mis à jour pour éviter les conflits d'id lors de l'ajout de nouvelles tâches.
  La méthode updateNextId parcourt toutes les tâches chargées pour trouver le plus grand id utilisé, puis met à jour nextId pour qu'il soit supérieur à ce maximum.*/
    private void updateNextId() {
