@@ -1,2 +1,20 @@
+#Task manager application
 *.class
 data/tasks.txt
+
+# Maven
+target/
+
+# Java
+*.class
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
