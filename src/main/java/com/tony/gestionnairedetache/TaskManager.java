@@ -102,6 +102,18 @@ public class TaskManager {
         }
         return null; 
     }
+    
+
+public Task updateTask(long id, Task task) {
+   Task updatedTask = getTaskbyId(id);
+    if (updatedTask == null) {
+        return null; 
+    }
+    updatedTask.setDescription(task.getDescription());
+    updatedTask.setCompleted(task.isCompleted());
+    return updatedTask;
+}
+
 /*lorsque je fais loadTasks, je dois m'assurer que le nextId est mis à jour pour éviter les conflits d'id lors de l'ajout de nouvelles tâches.
  La méthode updateNextId parcourt toutes les tâches chargées pour trouver le plus grand id utilisé, puis met à jour nextId pour qu'il soit supérieur à ce maximum.*/
    private void updateNextId() {
