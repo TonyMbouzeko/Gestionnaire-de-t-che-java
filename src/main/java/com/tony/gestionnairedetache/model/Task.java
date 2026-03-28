@@ -1,4 +1,4 @@
-package com.tony.gestionnairedetache;
+package com.tony.gestionnairedetache.model;
 public class Task {
 
     private String description;

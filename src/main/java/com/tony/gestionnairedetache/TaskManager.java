@@ -3,6 +3,9 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.tony.gestionnairedetache.model.Task;
+
 import java.util.Iterator;
 
 public class TaskManager {

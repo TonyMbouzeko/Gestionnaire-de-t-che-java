@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.tony.gestionnairedetache.model.Task;
+
 @RestController
 @RequestMapping("/tasks")
 
