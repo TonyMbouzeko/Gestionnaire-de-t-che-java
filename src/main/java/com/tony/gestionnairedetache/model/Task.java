@@ -1,9 +1,20 @@
 package com.tony.gestionnairedetache.model;
+
+import jakarta.persistence.*;
+
+@Entity
 public class Task {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
 
     private String description;
     private boolean completed;
-    private long id;
+
+    public Task(){};
+    
     public Task(String description) {
         this.description = description;
         this.completed = false;
