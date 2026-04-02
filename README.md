@@ -1,46 +1,113 @@
-# Gestionnaire de tâches (Java)
+# 📝 Task Manager API
 
-Ce projet est une application console développée en Java permettant de gérer une liste de tâches.
+## 🚀 Description
 
-## Fonctionnalités
+API REST développée avec **Spring Boot** permettant de gérer des tâches (CRUD).
 
-L'application permet de :
-- Ajouter une nouvelle tâche
-- Afficher la liste des tâches
-- Supprimer une tâche
-- Marquer une tâche comme terminée
-- Sauvegarder les tâches dans un fichier
-- Charger automatiquement les tâches au démarrage du programme
+Le projet utilise :
 
-Les tâches sont enregistrées dans un fichier texte afin de conserver les données entre les exécutions du programme.
+* Spring Boot (backend)
+* PostgreSQL (base de données)
+* Docker & Docker Compose (containerisation)
+* JPA / Hibernate (persistance des données)
 
-## Technologies utilisées
+---
 
-- Java
-- Programmation orientée objet (POO)
-- Structures de données (ArrayList)
-- Lecture et écriture de fichiers (File I/O)
+## ⚙️ Technologies
 
-## Structure du projet
+* Java 17+
+* Spring Boot
+* Spring Data JPA
+* PostgreSQL
+* Docker / Docker Compose
 
-task-manager-java
-|
-|----src
-|   |----Task.java
-|   |----TaskManager.java
-|----data
-|   |----task.txt
-| 
-|----README.md
+---
 
+## 📦 Fonctionnalités
 
-## Fonctionnement
+* Créer une tâche
+* Récupérer toutes les tâches
+* Mettre à jour une tâche
+* Supprimer une tâche
 
-Au démarrage du programme :
-1. Les tâches enregistrées dans le fichier `tasks.txt` sont chargées.
-2. Un menu interactif permet à l'utilisateur de gérer les tâches.
-3. Lorsque l'utilisateur quitte le programme, les tâches sont sauvegardées automatiquement.
+---
 
-## Auteur
-Tony MBOUZEKO
-Projet réalisé dans le cadre de l’apprentissage du langage Java et des concepts de programmation orientée objet.
+## 🐳 Lancer le projet avec Docker
+
+### 1. Cloner le projet
+
+```bash
+git clone <your-repo-url>
+cd <project-folder>
+```
+
+### 2. Lancer les containers
+
+```bash
+docker-compose up --build
+```
+
+---
+
+## 🌐 Accès
+
+* API : http://localhost:8080/tasks
+* pgAdmin : http://localhost:5050
+
+---
+
+## 🧪 Exemple de requête
+
+### POST /tasks
+
+```json
+{
+  "title": "Apprendre Docker",
+  "completed": false
+}
+```
+
+---
+
+## 🗄️ Base de données
+
+* PostgreSQL
+* Données persistées via Docker volume
+
+---
+
+## 📁 Structure du projet
+
+```
+controller/
+service/
+repository/
+model/
+```
+
+---
+
+## ⚙️ Variables d’environnement
+
+Les variables sont définies dans `docker-compose.yml` :
+
+* `SPRING_DATASOURCE_URL`
+* `SPRING_DATASOURCE_USERNAME`
+* `SPRING_DATASOURCE_PASSWORD`
+
+---
+
+## 🎯 Objectif
+
+Projet backend complet avec :
+
+* API REST
+* base de données
+* Docker
+* CI/CD (en cours)
+
+---
+
+## 👨‍💻 Auteur
+
+Tony
