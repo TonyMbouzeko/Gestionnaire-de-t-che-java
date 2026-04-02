@@ -2,20 +2,20 @@
 
 ## 🚀 Description
 
-API REST développée avec **Spring Boot** permettant de gérer des tâches (CRUD).
+ce projet a pour but de développée une API REST avec **Spring Boot** permettant de gérer des tâches (CRUD).
 
 Le projet utilise :
 
 * Spring Boot (backend)
 * PostgreSQL (base de données)
-* Docker & Docker Compose (containerisation)
-* JPA / Hibernate (persistance des données)
+* Docker & Docker Compose (containerisation afin que l'API puisse être lancer dans n'importe quel environnement)
+* JPA / Hibernate (Pour la persistance des données)
 
 ---
 
 ## ⚙️ Technologies
 
-* Java 17+
+* Java
 * Spring Boot
 * Spring Data JPA
 * PostgreSQL
@@ -37,8 +37,7 @@ Le projet utilise :
 ### 1. Cloner le projet
 
 ```bash
-git clone <your-repo-url>
-cd <project-folder>
+git clone https://github.com/TonyMbouzeko/Gestionnaire-de-t-che-java
 ```
 
 ### 2. Lancer les containers
@@ -62,7 +61,7 @@ docker-compose up --build
 
 ```json
 {
-  "title": "Apprendre Docker",
+  "title": "Tester l'API de gestion de tâche de Tony",
   "completed": false
 }
 ```
@@ -87,15 +86,6 @@ model/
 
 ---
 
-## ⚙️ Variables d’environnement
-
-Les variables sont définies dans `docker-compose.yml` :
-
-* `SPRING_DATASOURCE_URL`
-* `SPRING_DATASOURCE_USERNAME`
-* `SPRING_DATASOURCE_PASSWORD`
-
----
 
 ## 🎯 Objectif
 
