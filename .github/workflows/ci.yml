@@ -21,4 +21,4 @@ jobs:
         run: mvn clean install
 
       - name: Build image Docker
-        run: docker build -t gestionnaireDetaches .
+        run: docker build -t gestionnairedetaches .
