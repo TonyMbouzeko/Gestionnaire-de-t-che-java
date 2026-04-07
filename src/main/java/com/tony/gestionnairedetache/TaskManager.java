@@ -8,6 +8,7 @@ import com.tony.gestionnairedetache.model.Task;
 
 import java.util.Iterator;
 
+// Cette classe est actuellement inutile avec l'implémentation de springboot qui s'occupe de toutes ces tâches.
 public class TaskManager {
 
     private ArrayList<Task> tasks;

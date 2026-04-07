@@ -2,7 +2,9 @@ package com.tony.gestionnairedetache.service;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
+import com.tony.gestionnairedetache.exception.TaskNotFoundException;
 import com.tony.gestionnairedetache.model.Task;
 import com.tony.gestionnairedetache.repository.TaskRepository;
 
@@ -25,5 +27,10 @@ public class TaskService {
 
     public void deleteTask(Long id) {
         taskRepository.deleteById(id);
+    }
+
+    public Task getTask(long id){ 
+        return taskRepository.findById(id)
+                                .orElseThrow(() -> new TaskNotFoundException(id)) ;
     }
 }

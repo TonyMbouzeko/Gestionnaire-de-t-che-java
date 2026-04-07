@@ -1,0 +1,26 @@
+name: CI Pipeline pour projet de gestion de tâches de Tony
+
+on:
+  push:
+    branches: [ "main", "Phase4-Github_Actions(CI/CD)" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build with Maven
+        run: mvn clean install
+
+      - name: Build image Docker
+        run: docker build -t gestionnairedetaches .
