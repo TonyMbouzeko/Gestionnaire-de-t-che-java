@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import jakarta.servlet.http.HttpServletRequest;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +17,7 @@ public class GlobalExceptionHandler {
 public ResponseEntity<ApiError> handleValidationErrors(MethodArgumentNotValidException ex , HttpServletRequest request) {
     ApiError apiError = new ApiError();
 
-    String message = ex.getBindingResult().getAllErrors().getFirst().getDefaultMessage();
+    String message = ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
     apiError.setTimestamp(LocalDateTime.now());
     apiError.setStatus(400);
     apiError.setError("Bad Request");
