@@ -2,6 +2,9 @@ package com.tony.gestionnairedetache.model;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 @Entity
 public class Task {
 
@@ -10,7 +13,10 @@ public class Task {
     private long id;
 
 
+    @NotBlank(message = "La description de la tâche ne doit pas être vide")
+    @Size(min = 3, max = 255, message = " la description de la tâche doit contenir entre 3 et 255 caractères")
     private String description;
+
     private boolean completed;
 
     public Task(){};

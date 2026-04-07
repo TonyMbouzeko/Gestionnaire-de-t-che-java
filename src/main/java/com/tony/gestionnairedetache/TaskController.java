@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import com.tony.gestionnairedetache.model.Task;
 import com.tony.gestionnairedetache.service.TaskService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/tasks")
 
@@ -29,7 +31,7 @@ public class TaskController {
 
     //@RequestBody est utilisé pour indiquer que les données de la tâche seront envoyées dans le corps de la requête HTTP. Cela permet au client de fournir les détails de la tâche (comme la description) lors de l'ajout d'une nouvelle tâche via une requête POST.
     @PostMapping
-    public Task addTask(@RequestBody Task task){
+    public Task addTask( @Valid @RequestBody Task task){
         return taskService.createTask(task);
     }
 
