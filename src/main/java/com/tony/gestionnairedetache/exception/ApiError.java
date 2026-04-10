@@ -2,6 +2,10 @@ package com.tony.gestionnairedetache.exception;
 
 import java.time.LocalDateTime;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 public class ApiError{
 private LocalDateTime timestamp;
 private String error;
