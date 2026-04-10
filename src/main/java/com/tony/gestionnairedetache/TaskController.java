@@ -3,6 +3,8 @@ package com.tony.gestionnairedetache;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +15,7 @@ import com.tony.gestionnairedetache.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 
@@ -92,8 +94,9 @@ public class TaskController {
     )
     )
     @PostMapping
-    public Task addTask( @Valid @RequestBody Task task){
-        return taskService.createTask(task);
+    public ResponseEntity<Task> addTask( @Valid @RequestBody Task task){
+        Task createdTask = taskService.createTask(task);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
     }
 
     @Operation(summary = "Modifier une tâche" , description = "Met à jour une tâche existante à partir des données fournies dans le corps de la requête.")

@@ -2,7 +2,7 @@ name: CI Pipeline pour projet de gestion de tâches de Tony
 
 on:
   push:
-    branches: [ "main", "Phase4-Github_Actions(CI/CD)" ]
+    branches: [ "main", "Phase4-Github_Actions(CI/CD)", "Phase5-Documentation_swagger_OpenAPI" ]
   pull_request:
     branches: [ "main" ]
 

@@ -69,7 +69,7 @@ void shouldCreateTask() throws Exception {
                                 "completed": false
                             }
                             """))
-            .andExpect(status().isOk())
+            .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id").value(1))
             .andExpect(jsonPath("$.description").value("Test de création de tâche"))
             .andExpect(jsonPath("$.completed").value(false));

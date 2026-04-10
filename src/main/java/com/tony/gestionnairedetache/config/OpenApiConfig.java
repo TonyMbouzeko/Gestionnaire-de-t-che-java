@@ -21,6 +21,8 @@ public class OpenApiConfig {
         info.setDescription("Ceci est une API de gestion de tâches. Elle permet de consulter, créer, supprimer et mettre à jour des tâches.");
         
         contact.setName("Tony MBOUZEKO");
+        contact.setEmail("tony-bonnel.mbouzeko-mouafo.1@ens.etsmtl.ca");
+        contact.setUrl("https://github.com/TonyMbouzeko/Gestionnaire-de-t-che-java");
         info.setContact(contact);
 
         info.setVersion("1.0");
