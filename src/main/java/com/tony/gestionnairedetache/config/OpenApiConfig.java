@@ -1,11 +1,14 @@
 package com.tony.gestionnairedetache.config;
 
+import java.util.ArrayList;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
 public class OpenApiConfig {
@@ -28,6 +31,23 @@ public class OpenApiConfig {
         info.setVersion("1.0");
         
         openAPI.setInfo(info);
+
+        Server serverLocal = new Server();
+        serverLocal.setUrl("http://localhost:8080");
+        serverLocal.setDescription("Url du serveur en local");
+
+        Server serverDocker = new Server();
+        serverDocker.setUrl("http://localhost:8080");
+        serverDocker.setDescription("Url du serveur Docker");
+
+        ArrayList <Server> listServer = new ArrayList<>();
+
+        listServer.add(serverDocker);
+        listServer.add(serverLocal);
+        openAPI.setServers(listServer);
+
+
+
 
         return openAPI;
     }  
