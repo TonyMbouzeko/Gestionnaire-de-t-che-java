@@ -52,6 +52,7 @@ docker-compose up --build
 
 * API : http://localhost:8080/tasks
 * pgAdmin : http://localhost:5050
+* Swagger : http://localhost:8080/swagger-ui/index.html#/
 
 ---
 
@@ -97,6 +98,7 @@ Projet backend complet avec :
 * CI/CD (en cours)
 
 ---
+
 
 ## 👨‍💻 Auteur
 

@@ -33,4 +33,16 @@ public class TaskService {
         return taskRepository.findById(id)
                                 .orElseThrow(() -> new TaskNotFoundException(id)) ;
     }
+
+    public Task editTask(long id, Task task){
+        Task existingTask = taskRepository.findById(id)
+                            .orElseThrow(() -> new TaskNotFoundException(id));
+        
+        existingTask.setDescription(task.getDescription());
+        existingTask.setCompleted(task.isCompleted());
+        taskRepository.save(existingTask);
+        return existingTask;
+    }
+
+ 
 }
