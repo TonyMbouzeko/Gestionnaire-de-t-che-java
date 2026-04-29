@@ -1,8 +1,8 @@
-# 📝 Task Manager API
+# Task Manager API
 
-## 🚀 Description
+##  Description
 
-ce projet a pour but de développée une API REST avec **Spring Boot** permettant de gérer des tâches (CRUD).
+ce projet a pour but de développer une API REST avec **Spring Boot** permettant de gérer des tâches (CRUD).
 
 Le projet utilise :
 
@@ -13,17 +13,19 @@ Le projet utilise :
 
 ---
 
-## ⚙️ Technologies
+##  Technologies
 
 * Java
 * Spring Boot
 * Spring Data JPA
 * PostgreSQL
 * Docker / Docker Compose
+* Github Actions
+* Render
 
 ---
 
-## 📦 Fonctionnalités
+##  Fonctionnalités
 
 * Créer une tâche
 * Récupérer toutes les tâches
@@ -32,7 +34,7 @@ Le projet utilise :
 
 ---
 
-## 🐳 Lancer le projet avec Docker
+##  Lancer le projet avec Docker
 
 ### 1. Cloner le projet
 
@@ -48,15 +50,18 @@ docker-compose up --build
 
 ---
 
-## 🌐 Accès
+##  Accès
 
 * API : http://localhost:8080/tasks
 * pgAdmin : http://localhost:5050
-* Swagger : http://localhost:8080/swagger-ui/index.html#/
+* Swagger : http://localhost:8080/swagger-ui/index.html
 
 ---
+## URL render
+* https://gestionnaire-de-t-che-java.onrender.com
+---
 
-## 🧪 Exemple de requête
+##  Exemple de requête
 
 ### POST /tasks
 
@@ -69,37 +74,13 @@ docker-compose up --build
 
 ---
 
-## 🗄️ Base de données
+## Base de données
 
 * PostgreSQL
 * Données persistées via Docker volume
 
 ---
 
-## 📁 Structure du projet
-
-```
-controller/
-service/
-repository/
-model/
-```
-
----
-
-
-## 🎯 Objectif
-
-Projet backend complet avec :
-
-* API REST
-* base de données
-* Docker
-* CI/CD (en cours)
-
----
-
-
-## 👨‍💻 Auteur
+## Auteur
 
 Tony
