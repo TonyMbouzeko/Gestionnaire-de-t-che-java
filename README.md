@@ -2,7 +2,7 @@
 
 ##  Description
 
-ce projet a pour but de développée une API REST avec **Spring Boot** permettant de gérer des tâches (CRUD).
+ce projet a pour but de développer une API REST avec **Spring Boot** permettant de gérer des tâches (CRUD).
 
 Le projet utilise :
 
@@ -54,7 +54,7 @@ docker-compose up --build
 
 * API : http://localhost:8080/tasks
 * pgAdmin : http://localhost:5050
-* Swagger : http://localhost:8080/swagger-ui/index.html#/
+* Swagger : http://localhost:8080/swagger-ui/index.html
 
 ---
 ## URL render
