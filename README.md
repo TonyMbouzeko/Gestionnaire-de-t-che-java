@@ -20,6 +20,8 @@ Le projet utilise :
 * Spring Data JPA
 * PostgreSQL
 * Docker / Docker Compose
+* Github Actions
+* Render
 
 ---
 
@@ -55,6 +57,9 @@ docker-compose up --build
 * Swagger : http://localhost:8080/swagger-ui/index.html#/
 
 ---
+## URL render
+* https://gestionnaire-de-t-che-java.onrender.com
+---
 
 ## 🧪 Exemple de requête
 
@@ -75,30 +80,6 @@ docker-compose up --build
 * Données persistées via Docker volume
 
 ---
-
-## 📁 Structure du projet
-
-```
-controller/
-service/
-repository/
-model/
-```
-
----
-
-
-## 🎯 Objectif
-
-Projet backend complet avec :
-
-* API REST
-* base de données
-* Docker
-* CI/CD (en cours)
-
----
-
 
 ## 👨‍💻 Auteur
 
